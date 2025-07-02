@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  wework-mcp-server:
+    build: .
+    container_name: wework-mcp-server
+    restart: unless-stopped
+    environment:
+      - WEWORK_ACCESS_TOKEN=${WEWORK_ACCESS_TOKEN}
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 

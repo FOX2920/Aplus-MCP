@@ -46,7 +46,9 @@ uv sync
 
 ## Configuration
 
-### 1. WeWork Access Token
+### Local Setup
+
+#### 1. WeWork Access Token
 
 **Option A: Environment Variable (Recommended)**
 
@@ -60,7 +62,7 @@ WEWORK_ACCESS_TOKEN=your_actual_wework_token_here
 
 Update the `WEWORK_ACCESS_TOKEN` in `wework_mcp_server.py` with your actual WeWork API token.
 
-### 2. Claude Desktop Configuration
+#### 2. Claude Desktop Configuration (Local)
 
 Add this server to your Claude Desktop configuration file:
 
@@ -84,9 +86,49 @@ Add this server to your Claude Desktop configuration file:
 }
 ```
 
-### 3. Restart Claude Desktop
+#### 3. Restart Claude Desktop
 
 After adding the configuration, restart Claude Desktop to apply changes.
+
+### Remote Deployment 🚀
+
+Deploy the server to cloud platforms for remote access by Claude.
+
+#### Quick Deploy với Railway (Khuyến nghị)
+
+```bash
+# Install Railway CLI
+npm install -g @railway/cli
+
+# Deploy
+chmod +x deploy_scripts.sh
+./deploy_scripts.sh
+# Choose option 1 (Railway)
+```
+
+#### Deploy Options
+
+- **Railway**: `./deploy_scripts.sh` → option 1
+- **Docker**: `docker-compose up --build`
+- **Heroku**: `./deploy_scripts.sh` → option 4
+- **Manual**: Xem `DEPLOY_GUIDE.md`
+
+#### Remote Claude Configuration
+
+Sau khi deploy, cập nhật Claude config:
+
+```json
+{
+  "mcpServers": {
+    "wework-remote": {
+      "command": "curl",
+      "args": ["-X", "GET", "https://your-app.railway.app/api/test"]
+    }
+  }
+}
+```
+
+📖 **Chi tiết**: Xem `DEPLOY_GUIDE.md` cho hướng dẫn deploy đầy đủ.
 
 ## Usage
 
@@ -104,11 +146,21 @@ After adding the configuration, restart Claude Desktop to apply changes.
 
 ## Available Tools
 
+### MCP Tools (Local)
+
 - `search_projects` - Search for projects by name
 - `find_project_by_name` - Find project with similarity matching
 - `get_project_details` - Get detailed information about a specific project
 - `analyze_project_tasks` - Analyze tasks within a project
 - `get_project_statistics` - Get comprehensive project statistics
+
+### HTTP Endpoints (Remote)
+
+- `GET /health` - Health check
+- `GET /api/test` - Test WeWork connection
+- `GET /api/projects?search=<text>` - Search projects
+- `POST /api/project/details` - Get project details
+- `POST /api/project/analyze` - Analyze project tasks
 
 ## Development
 
