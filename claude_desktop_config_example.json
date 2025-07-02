@@ -4,7 +4,7 @@
       "command": "uv",
       "args": [
         "--directory", 
-        "C:/Users/YourName/Desktop/wework-mcp-server",
+        "C:/Users/Hii/Desktop/WM_MCP-master/WM_MCP-master",
         "run",
         "wework_mcp_server.py"
       ]
