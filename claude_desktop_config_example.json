@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "wework-task-analysis": {
+      "command": "uv",
+      "args": [
+        "--directory", 
+        "C:/Users/YourName/Desktop/wework-mcp-server",
+        "run",
+        "wework_mcp_server.py"
+      ]
+    }
+  }
+} 
